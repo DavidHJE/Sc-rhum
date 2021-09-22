@@ -6,6 +6,25 @@ let tileW = 100;
 let mapW = 10;
 let mapH = 7;
 
+canvasGame = document.getElementById('gameCanvas');
+ctx = canvasGame.getContext('2d')
+scene = new createjs.Stage(canvasGame);
+
+const j1Point = new createjs.Shape();
+j1Point.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 10);
+j1Point.x = 25;
+j1Point.y = 25;
+scene.addChild(j1Point);
+
+const j2Point = new createjs.Shape();
+j2Point.graphics.beginFill("Red").drawCircle(0, 0, 10);
+j2Point.x = 75;
+j2Point.y = 25;
+
+const j3Point = new createjs.Shape();
+j3Point.graphics.beginFill("Yellow").drawCircle(0, 0, 10);
+j3Point.x = 25;
+j3Point.y = 75;
 
 
 //CASES
@@ -36,9 +55,6 @@ var gameMap = [
 ];
 
 function initialise() {
-  canvasGame = document.getElementById('gameCanvas');
-  ctx = canvasGame.getContext('2d')
-  scene = new createjs.Stage(canvasGame);
 
     for(let y = 0; y < mapH; y++) {
       for(let x = 0; x < mapW; x++) {
@@ -52,7 +68,7 @@ function initialise() {
             break;
 
           case intrus:
-            tile.graphics.beginFill('#118eed').drawRect(0, 0, tileW, tileH);
+            image.src = "./assets/intrus.png";
             break;
 
           case malus4:
@@ -76,11 +92,11 @@ function initialise() {
             break;
 
           case quizz:
-            tile.graphics.beginFill('#e105f5').drawRect(0, 0, tileW, tileH);
+            image.src = "./assets/quizz.png";
             break;
 
           case retourDepart:
-            tile.graphics.beginFill('#000000').drawRect(0, 0, tileW, tileH);
+            image.src = "./assets/death.png";
             break;
           
           
@@ -97,16 +113,37 @@ function initialise() {
         bitmap.x = x*tileW;
         bitmap.y =  y*tileH;
 
-
-
         scene.addChild(tile);
         scene.addChild(bitmap);
       }
     }
 
+    scene.addChild(j1Point);
+    scene.addChild(j2Point);
+    scene.addChild(j3Point);
+
+
   setTimeout(() => { scene.update();}, 200);
   //scene.update();
 }
+
+let buttonDice = document.getElementById('buttonDice');
+let de = document.getElementById('de');
+buttonDice.addEventListener("click", function() {
+  var randomDice = Math.floor(6*Math.random())+1;
+  j1Point.x += 100 * randomDice;
+  if((j1Point.x > 1000 || j1Point.x == 925) && j1Point.y == 625) {
+    j1Point.x = 925;
+    j1Point.y = 625
+    console.log("GAGNE");
+  } else if (j1Point.x > 1000) {
+    j1Point.x -= 1000;
+    j1Point.y +=100;
+  }
+
+  de.innerHTML = randomDice;
+  scene.update();
+});
 
 initialise();
 
