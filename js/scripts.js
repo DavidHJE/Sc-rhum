@@ -50,5 +50,20 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
-
+    
 });
+
+
+// Récuperer la valeur du bouton radio coché et afficher des input texte en fonction du nombre de participants
+// var valeur;
+
+// if (document.getElementById('flexRadio1').checked) {
+// valeur = document.getElementById('flexRadio1').value = "1230";
+//        }
+//        else if (document.getElementById('flexRadio2').checked) {
+//         valeur = document.getElementById('flexRadio2').value;
+//        }
+//        else if (document.getElementById('flexRadio3').checked) {
+//         valeur = document.getElementById('flexRadio3').value;
+//        }
+
