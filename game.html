@@ -3,12 +3,51 @@
 <head>
   <meta charset="utf-8">
   <title>Sc'Rhum</title>
+  <link rel="stylesheet" href="./css/stylesGame.css" />
 </head>
 <body>
     <canvas id='gameCanvas' width='1000' height='700'></canvas>
 
-    <button id='buttonDice'>Lancer le dÃ©</button>
+    <button id='buttonDice'>Lancer le dé</button>
     <div id='diceDiv'></div>
+
+    <div class="dice">
+      <ol class="die-list even-roll" data-roll="1" id="die-1">
+        <li class="die-item" data-side="1">
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="2">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="3">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="4">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="5">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item" data-side="6">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+      </ol>
+    </div>
 
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>

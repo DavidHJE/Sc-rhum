@@ -202,12 +202,14 @@ let dice = document.getElementById('diceDiv');
 buttonDice.addEventListener("click", function () {
   let tileLandedX;
   let tileLandedY;
-
+  buttonDice.disabled = true;
   var randomDice = Math.floor(6 * Math.random()) + 1;
+
+  rollDice(randomDice);
 
   switch (actualPlayerId) {
     case 0:
-      //createjs.Tween.get(bitmapJ1).to({x: bitmapJ1.x + (100 * randomDice)}, 300, createjs.Ease.linear);
+      //createjs.Tween.get(bitmapJ1).to({x: bitmapJ1.x + (100 * randomDice)}, 300, createjs.Ease.getPowInOut(2));
       bitmapJ1.x += 100 * randomDice;    
       if ((bitmapJ1.x > 1000 || bitmapJ1.x == 930) && bitmapJ1.y == 630) {
         bitmapJ1.x = 930;
@@ -262,22 +264,32 @@ buttonDice.addEventListener("click", function () {
     default:
       break;
   }
+
+  
+
   // Update the scene to move the player pawn
-  setTimeout(() => { scene.update(); }, 200);
+  setTimeout(() => { 
+    scene.update();
+    // Get the tile where player landed
+    const tileLanded = _.find(tiles, function(tile) { return tile.x == tileLandedX && tile.y == tileLandedY; });
 
-  // Get the tile where player landed
-  const tileLanded = _.find(tiles, function(tile) { return tile.x == tileLandedX && tile.y == tileLandedY; });
+    // Execute the effect of the tile
+    executeTile(tileLanded, actualPlayerId);
 
-  // Execute the effect of the tile
-  executeTile(tileLanded, actualPlayerId);
+    diceDiv.innerHTML = randomDice + ' / ' + actualPlayerId;
 
-  diceDiv.innerHTML = randomDice + ' / ' + actualPlayerId;
-  setTimeout(() => { scene.update(); }, 600);
+    setTimeout(() => { 
+      scene.update();
+    }, 1500);
 
-  actualPlayerId++;
-  if(actualPlayerId > _.last(players).id) {
-    actualPlayerId = 0;
-  }
+    actualPlayerId++;
+    if(actualPlayerId > _.last(players).id) {
+      actualPlayerId = 0;
+    }
+    buttonDice.disabled = false;
+  }, 1500);
+
+  
 });
 
 function executeTile(tile, actualPlayerId) {
@@ -334,6 +346,19 @@ function executeTile(tile, actualPlayerId) {
     default:
       break;
   }
+}
+
+function rollDice(diceNumber) {
+  const dice = [...document.querySelectorAll(".die-list")];
+  dice.forEach(die => {
+    toggleClasses(die);
+    die.dataset.roll = diceNumber;
+  });
+}
+
+function toggleClasses(die) {
+  die.classList.toggle("odd-roll");
+  die.classList.toggle("even-roll");
 }
 
 initialise();
