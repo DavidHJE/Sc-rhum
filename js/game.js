@@ -332,7 +332,7 @@ function executeTile(tile, actualPlayerId) {
       break;
 
     case quizz:
-      console.log("LANCER JEU INTRUS");
+      console.log("LANCER JEU QUIZZ");
       break;
 
     case retourDepart:
