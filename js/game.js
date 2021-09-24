@@ -11,6 +11,12 @@ const playerIconW = 25;
 canvasGame = document.getElementById('gameCanvas');
 ctx = canvasGame.getContext('2d')
 scene = new createjs.Stage(canvasGame);
+const questionModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+let question; // réponse attendu
+const questiontitle = document.getElementById('questionTitle');
+const questionResponses = document.getElementById('questionResponses');;
+const modalTitle = document.getElementById('staticBackdropLabel');;
+const buttonValidateQuestion = document.getElementById('buttonValidateResponse');
 
 const startPos = [
   {
@@ -159,12 +165,12 @@ function initialise() {
         case normal:
         default:
           image.src = "./assets/normal.jpg";
-      }  
+      }
 
       let tile = {
         type: gameMap[((y * mapW) + x)],
         x: x * tileW + (tileW / 2),
-        y: y * tileH + (tileH / 2 )
+        y: y * tileH + (tileH / 2)
       }
 
       let bitmap = new createjs.Bitmap(image);
@@ -200,9 +206,36 @@ function initialise() {
 let buttonDice = document.getElementById('buttonDice');
 let dice = document.getElementById('diceDiv');
 buttonDice.addEventListener("click", function () {
+
+  console.log("LANCER JEU INTRUS");
+  //random question
+  question = questions.intruder[Math.floor((questions.intruder.length) * Math.random())]
+
+  //ouverture du modal
+
+  modalTitle.innerHTML = "Trouvez l'intrus";
+  let htmlResponses = "";
+
+  _.forEach(question.proposed_answer, (reponse, index) => {
+
+    htmlResponses +=
+      `<div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="${index}">
+      <label class="form-check-label" for="flexRadioDefault1">${reponse}</label>
+    </div>`
+
+  });
+
+  questionResponses.innerHTML = htmlResponses;
+  questiontitle.innerHTML = question.question;
+
+  questionModal.show();
+
+  //vérification
+
   let tileLandedX;
   let tileLandedY;
-  buttonDice.disabled = true;
+  //buttonDice.disabled = true;
   var randomDice = Math.floor(6 * Math.random()) + 1;
 
   rollDice(randomDice);
@@ -210,7 +243,7 @@ buttonDice.addEventListener("click", function () {
   switch (actualPlayerId) {
     case 0:
       //createjs.Tween.get(bitmapJ1).to({x: bitmapJ1.x + (100 * randomDice)}, 300, createjs.Ease.getPowInOut(2));
-      bitmapJ1.x += 100 * randomDice;    
+      bitmapJ1.x += 100 * randomDice;
       if ((bitmapJ1.x > 1000 || bitmapJ1.x == 930) && bitmapJ1.y == 630) {
         bitmapJ1.x = 930;
         bitmapJ1.y = 630
@@ -265,38 +298,37 @@ buttonDice.addEventListener("click", function () {
       break;
   }
 
-  
+
 
   // Update the scene to move the player pawn
-  setTimeout(() => { 
+  setTimeout(() => {
     scene.update();
     // Get the tile where player landed
-    const tileLanded = _.find(tiles, function(tile) { return tile.x == tileLandedX && tile.y == tileLandedY; });
+    const tileLanded = _.find(tiles, function (tile) { return tile.x == tileLandedX && tile.y == tileLandedY; });
 
     // Execute the effect of the tile
     executeTile(tileLanded, actualPlayerId);
 
     diceDiv.innerHTML = randomDice + ' / ' + players[actualPlayerId].name;
 
-    setTimeout(() => { 
+    setTimeout(() => {
       scene.update();
     }, 1500);
 
     actualPlayerId++;
-    if(actualPlayerId > _.last(players).id) {
+    if (actualPlayerId > _.last(players).id) {
       actualPlayerId = 0;
     }
     buttonDice.disabled = false;
   }, 1500);
 
-  
+
 });
 
 function executeTile(tile, actualPlayerId) {
 
   switch (tile.type) {
     case intrus:
-      console.log("LANCER JEU INTRUS");
       break;
 
     case malus4:
@@ -360,5 +392,14 @@ function toggleClasses(die) {
   die.classList.toggle("odd-roll");
   die.classList.toggle("even-roll");
 }
+
+buttonValidateQuestion.addEventListener("click", () => {
+  let selectedResponse = document.querySelector('input[type=radio]:checked');
+  if(_.toNumber(selectedResponse.id) == question.answer_index){
+    alert("Bien joué");
+  }else {
+    alert("C'est non !");
+  }
+  questionModal.hide() })
 
 initialise();

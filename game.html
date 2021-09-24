@@ -11,6 +11,17 @@
 			<h1 class="h1 text-white">Sc'rhum</h1>
 		</div>
 
+<head>
+  <meta charset="utf-8">
+  <title>Sc'Rhum</title>
+  <link rel="stylesheet" href="./css/stylesGame.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body>
+  <canvas id='gameCanvas' width='1000' height='700'></canvas>
+
 		<div class="container-fluid overflow-hidden">
 			<div class="row mb-2">
 				<div class="col py-2" id="player0">
@@ -26,6 +37,8 @@
 					Joueur 4
 				</div>
 			</div>
+  <button id='buttonDice'>Lancer le dé</button>
+  <div id='diceDiv'></div>
 
 			<div class="row">
 				<div class="col">
@@ -34,6 +47,62 @@
 				<div class="col">
 					<button id='buttonDice'>Lancer le dé</button>
 					<div id='diceDiv'></div>
+  <div class="dice">
+    <ol class="die-list even-roll" data-roll="1" id="die-1">
+      <li class="die-item" data-side="1">
+        <span class="dot"></span>
+      </li>
+      <li class="die-item" data-side="2">
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </li>
+      <li class="die-item" data-side="3">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </li>
+      <li class="die-item" data-side="4">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </li>
+      <li class="die-item" data-side="5">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </li>
+      <li class="die-item" data-side="6">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        </div>
+        <div class="modal-body">
+          <div id = "questionTitle"></div>
+          <div id = "questionResponses"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-succes" id="buttonValidateResponse">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 					<div class="dice">
 						<ol class="die-list even-roll" data-roll="1" id="die-1">
@@ -84,4 +153,16 @@
 		<script src="./js/lodash.js"></script>
 		<script src="./js/game.js"></script>
 	</body>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+  <script src="./js/lodash.js"></script>
+  <script src = "./questions.js"></script>
+  <script src="./js/game.js"></script>
+  
+</body>
+
 </html>
