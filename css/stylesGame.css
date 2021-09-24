@@ -2,6 +2,14 @@
   box-sizing: content-box!important;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+.player-active {
+  background-color: blueviolet;
+}
+
 .dice {
   align-items: center;
   display: grid;
@@ -190,4 +198,10 @@ button:hover {
   .dice {
     perspective: 1300px;
   }
+}
+
+
+.title-background {
+  background-color: #1abc9c;
+
 }
