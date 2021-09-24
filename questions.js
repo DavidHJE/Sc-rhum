@@ -13,7 +13,7 @@ const questions = {
       question: "Le pair programming signifie :",
       proposed_answer: [
         "Les deux développeurs codent la même fonctionnalité",
-        "L'un développe et l'autre assiste et réalise des tests.",
+        "L'un développe et l'autre assiste et réalise des tests",
       ],
       answer_index: 1,
       difficulty: 1,
@@ -36,15 +36,15 @@ const questions = {
     {
       id: 5,
       question: "Trouver l'un des piliers de SCRUM",
-      proposed_answer: ["Vrai", "Faux"],
-      answer_index: 1,
+      proposed_answer: ["Inspection", "Investissement", "Increment"],
+      answer_index: 0,
       difficulty: 1,
     },
     {
       id: 6,
       question: "Lequel de ces rôles SCRUM existe ?",
       proposed_answer: ["SCRUM master", "SCRUM owner"],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -56,14 +56,14 @@ const questions = {
         "Les stars",
         "Les influenceurs",
       ],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
       id: 8,
       question: "L'incrément de produit est un artefact SCRUM.",
       proposed_answer: ["Vrai", "Faux"],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -82,7 +82,7 @@ const questions = {
         "Product vaiselle",
         "Owner product",
       ],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -105,7 +105,7 @@ const questions = {
         "La création de tests unitaires est maintenue tout au long du projet",
         "la création de test de fonctionnalitées",
       ],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -140,7 +140,7 @@ const questions = {
       question:
         "Le scrum master explique et fait appliquer Scrum et les principes de l'Agilité",
       proposed_answer: ["Vrai", "Faux"],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -160,7 +160,7 @@ const questions = {
         "du sprint backlog",
         "a la livraison du produit final",
       ],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
@@ -168,7 +168,7 @@ const questions = {
       question:
         "Une Story est un élément de fonction, visible d'un utilisateur",
       proposed_answer: ["Vrai", "Faux"],
-      answer_index: 1,
+      answer_index: 0,
       difficulty: 1,
     },
     {
