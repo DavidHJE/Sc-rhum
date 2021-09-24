@@ -11,12 +11,18 @@ const playerIconW = 25;
 canvasGame = document.getElementById('gameCanvas');
 ctx = canvasGame.getContext('2d')
 scene = new createjs.Stage(canvasGame);
-const questionModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+const questionModal = new bootstrap.Modal(document.getElementById('modalQuestion'));
 let question; // réponse attendu
 const questiontitle = document.getElementById('questionTitle');
 const questionResponses = document.getElementById('questionResponses');;
 const modalTitle = document.getElementById('staticBackdropLabel');;
 const buttonValidateQuestion = document.getElementById('buttonValidateResponse');
+let htmlResponses = "";
+
+const endModal = new bootstrap.Modal(document.getElementById('modalEnd'));
+const endModalTitle = document.getElementById('modalEndTitleLabel');
+
+const playersInfos = document.getElementsByClassName('playerInfo');
 
 const startPos = [
   {
@@ -64,6 +70,7 @@ imageJ1.src = './assets/pawnJ1.png';
 const bitmapJ1 = new createjs.Bitmap(imageJ1);
 bitmapJ1.regX = 12.5;
 bitmapJ1.regY = 12.5;
+bitmapJ1.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 bitmapJ1.x = startPos[0].x;
 bitmapJ1.y = startPos[0].y;
 
@@ -72,6 +79,7 @@ imageJ2.src = './assets/pawnJ2.png';
 const bitmapJ2 = new createjs.Bitmap(imageJ2);
 bitmapJ2.regX = 12.5;
 bitmapJ2.regY = 12.5;
+bitmapJ2.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 bitmapJ2.x = startPos[1].x;
 bitmapJ2.y = startPos[1].y;
 
@@ -80,6 +88,7 @@ imageJ3.src = './assets/pawnJ3.png';
 const bitmapJ3 = new createjs.Bitmap(imageJ3);
 bitmapJ3.regX = 12.5;
 bitmapJ3.regY = 12.5;
+bitmapJ3.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 bitmapJ3.x = startPos[2].x;
 bitmapJ3.y = startPos[2].y;
 
@@ -88,6 +97,7 @@ imageJ4.src = './assets/pawnJ4.png';
 const bitmapJ4 = new createjs.Bitmap(imageJ4);
 bitmapJ4.regX = 12.5;
 bitmapJ4.regY = 12.5;
+bitmapJ4.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 bitmapJ4.x = startPos[3].x;
 bitmapJ4.y = startPos[3].y;
 
@@ -199,43 +209,17 @@ function initialise() {
     scene.addChild(bitmapJ4);
     playersPoints.push(bitmapJ3, bitmapJ4);
   }
-
+  playersInfos[actualPlayerId].classList.add("activePlayer");
   setTimeout(() => { scene.update(); }, 100); // timeout pour garantir chargements des images avant affichage
 }
 
 let buttonDice = document.getElementById('buttonDice');
-let dice = document.getElementById('diceDiv');
 buttonDice.addEventListener("click", function () {
-
-  console.log("LANCER JEU INTRUS");
-  //random question
-  question = questions.intruder[Math.floor((questions.intruder.length) * Math.random())]
-
-  //ouverture du modal
-
-  modalTitle.innerHTML = "Trouvez l'intrus";
-  let htmlResponses = "";
-
-  _.forEach(question.proposed_answer, (reponse, index) => {
-
-    htmlResponses +=
-      `<div class="form-check">
-      <input class="form-check-input" type="radio" name="flexRadioDefault" id="${index}">
-      <label class="form-check-label" for="flexRadioDefault1">${reponse}</label>
-    </div>`
-
-  });
-
-  questionResponses.innerHTML = htmlResponses;
-  questiontitle.innerHTML = question.question;
-
-  questionModal.show();
-
-  //vérification
+  buttonDice.disabled = true;
 
   let tileLandedX;
   let tileLandedY;
-  //buttonDice.disabled = true;
+
   var randomDice = Math.floor(6 * Math.random()) + 1;
 
   rollDice(randomDice);
@@ -247,7 +231,7 @@ buttonDice.addEventListener("click", function () {
       if ((bitmapJ1.x > 1000 || bitmapJ1.x == 930) && bitmapJ1.y == 630) {
         bitmapJ1.x = 930;
         bitmapJ1.y = 630
-        console.log(`${players[0].name} a gagné !`);
+        endGame();
       } else if (bitmapJ1.x > 1000) {
         bitmapJ1.x -= 1000;
         bitmapJ1.y += 100;
@@ -260,7 +244,7 @@ buttonDice.addEventListener("click", function () {
       if ((bitmapJ2.x > 1000 || bitmapJ2.x == 970) && bitmapJ2.y == 630) {
         bitmapJ2.x = 970;
         bitmapJ2.y = 630
-        console.log(`${players[1].name} a gagné !`);
+        endGame();
       } else if (bitmapJ2.x > 1000) {
         bitmapJ2.x -= 1000;
         bitmapJ2.y += 100;
@@ -273,7 +257,7 @@ buttonDice.addEventListener("click", function () {
       if ((bitmapJ3.x > 1000 || bitmapJ3.x == 930) && bitmapJ3.y == 670) {
         bitmapJ3.x = 930;
         bitmapJ3.y = 670
-        console.log(`${players[2].name} a gagné !`);
+        endGame();
       } else if (bitmapJ3.x > 1000) {
         bitmapJ3.x -= 1000;
         bitmapJ3.y += 100;
@@ -286,7 +270,7 @@ buttonDice.addEventListener("click", function () {
       if ((bitmapJ4.x > 1000 || bitmapJ4.x == 970) && bitmapJ4.y == 670) {
         bitmapJ4.x = 970;
         bitmapJ4.y = 670
-        console.log(`${players[3].name} a gagné !`);
+        endGame();
       } else if (bitmapJ4.x > 1000) {
         bitmapJ4.x -= 1000;
         bitmapJ4.y += 100;
@@ -297,9 +281,6 @@ buttonDice.addEventListener("click", function () {
     default:
       break;
   }
-
-
-
   // Update the scene to move the player pawn
   setTimeout(() => {
     scene.update();
@@ -309,26 +290,29 @@ buttonDice.addEventListener("click", function () {
     // Execute the effect of the tile
     executeTile(tileLanded, actualPlayerId);
 
-    diceDiv.innerHTML = randomDice + ' / ' + players[actualPlayerId].name;
-
-    setTimeout(() => {
-      scene.update();
-    }, 1500);
-
-    actualPlayerId++;
-    if (actualPlayerId > _.last(players).id) {
-      actualPlayerId = 0;
-    }
-    buttonDice.disabled = false;
-  }, 1500);
-
-
+  }, 800);
 });
 
 function executeTile(tile, actualPlayerId) {
-
   switch (tile.type) {
     case intrus:
+      // Get random question
+      question = questions.intruder[Math.floor((questions.intruder.length) * Math.random())]
+      htmlResponses = '';
+      // Populate modal
+      modalTitle.innerHTML = '<h1>Trouvez l\'intrus</h1>';
+      _.forEach(question.proposed_answer, (reponse, index) => {
+        htmlResponses +=
+          `<div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="${index}">
+          <label class="form-check-label" for="flexRadioDefault1">${reponse}</label>
+        </div>`;
+      });
+      questionResponses.innerHTML = htmlResponses;
+      questiontitle.innerHTML = question.question;
+
+      // Open modal
+      questionModal.show();
       break;
 
     case malus4:
@@ -337,6 +321,7 @@ function executeTile(tile, actualPlayerId) {
         playersPoints[actualPlayerId].x += 1000;
         playersPoints[actualPlayerId].y -= 100;
       }
+      endTurn();
       break;
 
     case malus2:
@@ -345,6 +330,7 @@ function executeTile(tile, actualPlayerId) {
         playersPoints[actualPlayerId].x += 1000;
         playersPoints[actualPlayerId].y -= 100;
       }
+      endTurn();
       break;
 
     case bonus1:
@@ -353,6 +339,7 @@ function executeTile(tile, actualPlayerId) {
         playersPoints[actualPlayerId].x -= 1000;
         playersPoints[actualPlayerId].y += 100;
       }
+      endTurn();
       break;
 
     case bonus2:
@@ -361,21 +348,40 @@ function executeTile(tile, actualPlayerId) {
         playersPoints[actualPlayerId].x -= 1000;
         playersPoints[actualPlayerId].y += 100;
       }
+      endTurn();
       break;
 
     case quizz:
-      console.log("LANCER JEU QUIZZ");
+      // Get random question
+      question = questions.quiz[Math.floor((questions.quiz.length) * Math.random())]
+      htmlResponses = '';
+      // Populate modal
+      modalTitle.innerHTML = '<h1>Quizz</h1>';
+      _.forEach(question.proposed_answer, (reponse, index) => {
+        htmlResponses +=
+          `<div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="${index}">
+          <label class="form-check-label" for="flexRadioDefault1">${reponse}</label>
+        </div>`;
+      });
+      questionResponses.innerHTML = htmlResponses;
+      questiontitle.innerHTML = question.question;
+
+      // Open modal
+      questionModal.show();
       break;
 
     case retourDepart:
       playersPoints[actualPlayerId].x = startPos[actualPlayerId].x;
       playersPoints[actualPlayerId].y = startPos[actualPlayerId].y;
+      endTurn();
       break;
 
     case end:
     case start:
     case normal:
     default:
+      endTurn();
       break;
   }
 }
@@ -395,11 +401,39 @@ function toggleClasses(die) {
 
 buttonValidateQuestion.addEventListener("click", () => {
   let selectedResponse = document.querySelector('input[type=radio]:checked');
-  if(_.toNumber(selectedResponse.id) == question.answer_index){
-    alert("Bien joué");
-  }else {
-    alert("C'est non !");
+  if(selectedResponse) {
+    if(_.toNumber(selectedResponse.id) == question.answer_index){
+      alert("Bien joué");
+      playersPoints[actualPlayerId].x += 100;
+      if (playersPoints[actualPlayerId].x > 1000) {
+        playersPoints[actualPlayerId].x -= 1000;
+        playersPoints[actualPlayerId].y += 100;
+      }
+    }else {
+      alert("C'est non !");
+    }
+    questionModal.hide();
+    endTurn();
   }
-  questionModal.hide() })
+});
+
+function endTurn() {
+  playersInfos[actualPlayerId].classList.remove("activePlayer");
+
+  setTimeout(() => {
+    actualPlayerId++;
+    if (actualPlayerId > _.last(players).id) {
+      actualPlayerId = 0;
+    }
+    playersInfos[actualPlayerId].classList.add("activePlayer");
+    scene.update();
+    buttonDice.disabled = false;
+  }, 1000);
+}
+
+function endGame() {
+  endModalTitle.innerHTML = `Victoire de ${players[actualPlayerId].name}`;
+  endModal.show()
+}
 
 initialise();

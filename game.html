@@ -13,74 +13,75 @@
 
     <div class="container-fluid overflow-hidden">
       <div class="row mb-2">
-        <div class="col py-2" id="player0">
+        <div class="col py-2 playerInfo" id="player0">
           Joueur 1
+          <image src="./assets/pawnJ1.png"></image>
         </div>
-        <div class="col py-2" id="player1">
+        <div class="col py-2 playerInfo" id="player1">
           Joueur 2
+          <image src="./assets/pawnJ2.png"></image>
         </div>
-        <div class="col py-2" id="player2">
+        <div class="col py-2 playerInfo" id="player2">
           Joueur 3
+          <image src="./assets/pawnJ3.png"></image>
         </div>
-        <div class="col py-2" id="player3">
+        <div class="col py-2 playerInfo" id="player3">
           Joueur 4
+          <image src="./assets/pawnJ4.png"></image>
         </div>
       </div>
     </div>
 
-  <div class="row">
-    <div class="col">
-      <canvas id='gameCanvas' width='1000' height='700'></canvas>
-    </div>
-    <div class="col">
-      <button id='buttonDice'>Lancer le dé</button>
-      <div id='diceDiv'></div>
-
-      <div class="dice">
-        <ol class="die-list even-roll" data-roll="1" id="die-1">
-          <li class="die-item" data-side="1">
-            <span class="dot"></span>
-          </li>
-          <li class="die-item" data-side="2">
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </li>
-          <li class="die-item" data-side="3">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </li>
-          <li class="die-item" data-side="4">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </li>
-          <li class="die-item" data-side="5">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </li>
-          <li class="die-item" data-side="6">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </li>
-        </ol>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <canvas id='gameCanvas' width='1000' height='700'></canvas>
+      </div>
+      <div class="col">
+        <button id='buttonDice'>Lancer le dé</button>
+        <div class="dice">
+          <ol class="die-list even-roll" data-roll="1" id="die-1">
+            <li class="die-item" data-side="1">
+              <span class="dot"></span>
+            </li>
+            <li class="die-item" data-side="2">
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </li>
+            <li class="die-item" data-side="3">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </li>
+            <li class="die-item" data-side="4">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </li>
+            <li class="die-item" data-side="5">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </li>
+            <li class="die-item" data-side="6">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
 
-
-</div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <!-- Modal Questions-->
+  <div class="modal fade" id="modalQuestion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -92,7 +93,22 @@
           <div id = "questionResponses"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-succes" id="buttonValidateResponse">Valider</button>
+          <button type="button" class="btn btn-success" id="buttonValidateResponse">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal END GAME-->
+  <div class="modal fade" id="modalEnd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalEndLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEndTitleLabel"></h5>
+        </div>
+        <div class="modal-footer">
+          <a href="./index.html" class="btn btn-succes">Retour au menu</a>
         </div>
       </div>
     </div>

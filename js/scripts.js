@@ -50,20 +50,64 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
-    
+
 });
 
+// Détection du support
+//  if(typeof sessionStorage!='undefined') {
+//     if('message' in sessionStorage) {
+//       alert("Message récupéré");
+//       document.getElementById('nom1').value = sessionStorage.getItem('nom1');
+//     }
+//   } else {
+//     alert("sessionStorage n'est pas supporté");
+//   }
+//   if(typeof sessionStorage!='undefined') {
+//     if('message' in sessionStorage) {
+//       alert("Message récupéré");
+//       document.getElementById('nom2').value = sessionStorage.getItem('nom2');
+//     }
+//   } else {
+//     alert("sessionStorage n'est pas supporté");
+//   }
+//   console.log('nom1');
+//   console.log('nom2');
 
-// Récuperer la valeur du bouton radio coché et afficher des input texte en fonction du nombre de participants
-// var valeur;
+// tableauJoueur[0];
 
-// if (document.getElementById('flexRadio1').checked) {
-// valeur = document.getElementById('flexRadio1').value = "1230";
-//        }
-//        else if (document.getElementById('flexRadio2').checked) {
-//         valeur = document.getElementById('flexRadio2').value;
-//        }
-//        else if (document.getElementById('flexRadio3').checked) {
-//         valeur = document.getElementById('flexRadio3').value;
-//        }
 
+var k = "Joueur 1 :";
+var z = "Joueur 2 : ";
+
+function RecupNom() {
+    var input = document.getElementsByName('nom');
+
+    for (var i = 0; i < input.length; i++) {
+        var a = input[i];
+        k = k + a.value;
+    }
+
+    document.getElementById("par").innerHTML = k;
+    document.getElementById("po").innerHTML = "Output";
+}
+
+$(document).ready(function () {
+    $(".msg").not(".yellow.msg").hide();
+    $(".yellow.msg").show();
+    $('input[type="radio"]').click(function () {
+      var val = $(this).attr("value");
+      var target = $("." + val);
+      $(".msg").not(target).hide();
+      $(target).show();
+    });
+
+    let t = $('input[type="radio"]:checked').id;
+
+    console.info("Ici resultat input");
+    console.log(t);
+
+    let y = document.querySelectorAll("input[name='joueur1']");
+    console.log(y);
+
+    
+  });
