@@ -276,7 +276,7 @@ buttonDice.addEventListener("click", function () {
     // Execute the effect of the tile
     executeTile(tileLanded, actualPlayerId);
 
-    diceDiv.innerHTML = randomDice + ' / ' + actualPlayerId;
+    diceDiv.innerHTML = randomDice + ' / ' + players[actualPlayerId].name;
 
     setTimeout(() => { 
       scene.update();

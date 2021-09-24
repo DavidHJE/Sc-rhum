@@ -1,3 +1,7 @@
+*, ::after, ::before {
+  box-sizing: content-box!important;
+}
+
 .dice {
   align-items: center;
   display: grid;
