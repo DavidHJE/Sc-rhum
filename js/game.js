@@ -210,13 +210,13 @@ buttonDice.addEventListener("click", function () {
   let tileLandedX;
   let tileLandedY;
 
-  var randomDice = Math.floor(6 * Math.random()) + 1;
+  var randomDiceNumber = rando(1, 6)
 
-  rollDice(randomDice);
+  rollDice(randomDiceNumber);
 
   switch (actualPlayerId) {
     case 0:
-      bitmapJ1.x += 100 * randomDice;
+      bitmapJ1.x += 100 * randomDiceNumber;
       if ((bitmapJ1.x > 1000 || bitmapJ1.x == 930) && bitmapJ1.y == 630) {
         bitmapJ1.x = 930;
         bitmapJ1.y = 630
@@ -229,7 +229,7 @@ buttonDice.addEventListener("click", function () {
       tileLandedY = Math.round(bitmapJ1.y / 50) * 50;
       break;
     case 1:
-      bitmapJ2.x += 100 * randomDice;
+      bitmapJ2.x += 100 * randomDiceNumber;
       if ((bitmapJ2.x > 1000 || bitmapJ2.x == 970) && bitmapJ2.y == 630) {
         bitmapJ2.x = 970;
         bitmapJ2.y = 630
@@ -242,7 +242,7 @@ buttonDice.addEventListener("click", function () {
       tileLandedY = Math.round(bitmapJ2.y / 50) * 50;
       break;
     case 2:
-      bitmapJ3.x += 100 * randomDice;
+      bitmapJ3.x += 100 * randomDiceNumber;
       if ((bitmapJ3.x > 1000 || bitmapJ3.x == 930) && bitmapJ3.y == 670) {
         bitmapJ3.x = 930;
         bitmapJ3.y = 670
@@ -255,7 +255,7 @@ buttonDice.addEventListener("click", function () {
       tileLandedY = Math.round(bitmapJ3.y / 50) * 50;
       break;
     case 3:
-      bitmapJ4.x += 100 * randomDice;
+      bitmapJ4.x += 100 * randomDiceNumber;
       if ((bitmapJ4.x > 1000 || bitmapJ4.x == 970) && bitmapJ4.y == 670) {
         bitmapJ4.x = 970;
         bitmapJ4.y = 670
