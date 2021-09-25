@@ -56,7 +56,7 @@ let actualPlayerId = players[0].id;
 
 // Creation des pions des joueurs
 const imageJ1 = new Image(playerIconW, playerIconH);
-imageJ1.src = './assets/pawnJ1.png';
+imageJ1.src = './assets/pawn0.png';
 const bitmapJ1 = new createjs.Bitmap(imageJ1);
 bitmapJ1.regX = 12.5;
 bitmapJ1.regY = 12.5;
@@ -65,7 +65,7 @@ bitmapJ1.x = startPos[0].x;
 bitmapJ1.y = startPos[0].y;
 
 const imageJ2 = new Image(playerIconW, playerIconH);
-imageJ2.src = './assets/pawnJ2.png';
+imageJ2.src = './assets/pawn1.png';
 const bitmapJ2 = new createjs.Bitmap(imageJ2);
 bitmapJ2.regX = 12.5;
 bitmapJ2.regY = 12.5;
@@ -74,7 +74,7 @@ bitmapJ2.x = startPos[1].x;
 bitmapJ2.y = startPos[1].y;
 
 const imageJ3 = new Image(playerIconW, playerIconH);
-imageJ3.src = './assets/pawnJ3.png';
+imageJ3.src = './assets/pawn2.png';
 const bitmapJ3 = new createjs.Bitmap(imageJ3);
 bitmapJ3.regX = 12.5;
 bitmapJ3.regY = 12.5;
@@ -83,7 +83,7 @@ bitmapJ3.x = startPos[2].x;
 bitmapJ3.y = startPos[2].y;
 
 const imageJ4 = new Image(playerIconW, playerIconH);
-imageJ4.src = './assets/pawnJ4.png';
+imageJ4.src = './assets/pawn3.png';
 const bitmapJ4 = new createjs.Bitmap(imageJ4);
 bitmapJ4.regX = 12.5;
 bitmapJ4.regY = 12.5;
