@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title></title>
+  <title>Sc-rhum</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
@@ -20,25 +20,6 @@
 </head>
 
 <body id="page-top">
-
-  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-    <div class="container">
-
-      <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
-        aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <!-- <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"></a></li>
-          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"></a></li>
-          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"></a></li>
-        </ul> -->
-    </div>
-    </div>
-  </nav>
   <!-- Masthead-->
   <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -54,95 +35,38 @@
 
   <section class="page-section ">
     <div class="container">
-      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadio2" value="yellow.msg">
-        <label class="form-check-label" for="nbreJoueur2">
-          2 joueurs
-        </label>
-      </div>
-      </form>
-
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadio3" value="red.msg">
-        <label class="form-check-label" for="nbreJoueur3">
-          3 joueurs
-        </label>
-      </div>
-      </form>
-
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadio4" value="green.msg">
-        <label class="form-check-label" for="nbreJoueur4">
-          4 joueurs
-        </label>
-      </div>
-
-      </form>
-      <!-- <script>
-
-        var tableauJoueur = [{
-          id: 0,
-          name: "jojueur"
-        },
-        {
-          id: 1,
-          name: "jojueur2"
-        },
-        {
-          id: 2,
-          name: "jojueur3"
-        },
-        {
-          id: 3,
-          name: "jojueur4"
-        }
-        ];
-
-        console.log(JSON.stringify(tableauJoueur));
-
-      </script> -->
-
-      <br>
-      <div class="yellow msg">Vous avez sélectionné 2 joueurs, entrez vos pseudo :</div>
-      <div class="red msg">Vous avez sélectionné 3 joueurs, entrez vos pseudo :</div>
-      <div class="green msg">Vous avez sélectionné 4 joueurs, entrez vos pseudo :</div>
-      <br>
       <div>
-
-        <input type="text" class="yellow msg " name="joueur1" placeholder="Joueur n°1">
-        <input type="text" class="yellow msg " name="joueur2" placeholder="Joueur n°2">
-        <input type="text" class="red msg" name="joueur3" placeholder="Joueur n°1">
-        <input type="text" class="red msg" name="joueur4" placeholder="Joueur n°2">
-        <input type="text" class="red msg" name="joueur5" placeholder="Joueur n°3">
-        <input type="text" class="green msg" name="joueur6" placeholder="Joueur n°1">
-        <input type="text" class="green msg" name="joueur7" placeholder="Joueur n°2">
-        <input type="text" class="green msg" name="joueur8" placeholder="Joueur n°3">
-        <input type="text" class="green msg" name="joueur9" placeholder="Joueur n°4">
+        <label for="selectorNbPlayers" class="form-label">Nombre de joueurs:</label>
+        <input type="range" class="form-range" min="2" max="4" id="selectorNbPlayers" value=2>
+      </div>    
+  
+      <div>
+        <p id='messageNbPlayers'>Vous avez sélectionné 2 joueurs, entrez vos pseudo :</p>
       </div>
 
+
+      <div class="alert alert-warning alert-dismissible" id='alertUsernames'>
+        <button type="button" class="btn-close" aria-label="Close" id='buttonAlert'></button>
+        Veuillez choisir des pseudonymes pour tout les joueurs !
+      </div>
+      
+      <form id='usernamesContainer' class='row'>
+      </form>
+    
       <div class="divider-custom">
-        <a href="./game.html" class="btn btn-primary btn-lg" id="lancerJeu">Lancer la partie</a>
-      </div>
-
-      <div class="row justify-content-center">
-
+        <button class="btn btn-primary btn-lg" id="launchGameButton">Lancer la partie</button>
       </div>
     </div>
 
   </section>
 
 
-  <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Core theme JS-->
-  <script src="js/scripts.js"></script>
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- * *                               SB Forms JS                               * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+    <script src="./js/lodash.js"></script>
+  <script src="js/menu.js"></script>
 </body>
 
 </html>

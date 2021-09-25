@@ -22,6 +22,7 @@ let htmlResponses = "";
 const endModal = new bootstrap.Modal(document.getElementById('modalEnd'));
 const endModalTitle = document.getElementById('modalEndTitleLabel');
 
+const containerPlayersInfos = document.getElementById('containerPlayersInfos');
 const playersInfos = document.getElementsByClassName('playerInfo');
 
 const startPos = [
@@ -43,24 +44,13 @@ const startPos = [
   }
 ];
 
-const players = [
-  {
-    id: 0,
-    name: "Joueur1",
-  },
-  {
-    id: 1,
-    name: "Joueur2",
-  },
-  {
-    id: 2,
-    name: "Joueur3",
-  },
-  {
-    id: 3,
-    name: "Joueur4",
-  }
-];
+const players = JSON.parse(localStorage.getItem('playersArray'));
+
+containerPlayersInfos.innerHTML = '';
+_.forEach(players, (player) => {
+  containerPlayersInfos.innerHTML += `<div class="col py-2 playerInfo">${player.name}<image src="./assets/pawn${player.id}.png"></image></div>`;
+});
+
 
 let actualPlayerId = players[0].id;
 
@@ -226,7 +216,6 @@ buttonDice.addEventListener("click", function () {
 
   switch (actualPlayerId) {
     case 0:
-      //createjs.Tween.get(bitmapJ1).to({x: bitmapJ1.x + (100 * randomDice)}, 300, createjs.Ease.getPowInOut(2));
       bitmapJ1.x += 100 * randomDice;
       if ((bitmapJ1.x > 1000 || bitmapJ1.x == 930) && bitmapJ1.y == 630) {
         bitmapJ1.x = 930;
