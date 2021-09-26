@@ -27,6 +27,10 @@ launchGameButton.addEventListener('click', () => {
         players.push({id: i, name: input.value});
         if (_.isEmpty(input.value)) {
             canLaunchGame = false
+            input.classList.add('attention');
+            setTimeout(() => {
+                input.classList.remove('attention');
+            }, 1500);
         }
     });
 
@@ -47,7 +51,7 @@ function updateNbPlayers(nbPlayer) {
     messageNbPlayers.innerHTML = `Vous avez sélectionné ${nbPlayer} joueurs, entrez vos pseudo :`;
 
     for(let i = 1; i <= nbPlayer; i++) {
-        htmlUsername += `<div class='col'><input type="text" class="form-control inputUsername" name="joueur${i}" placeholder="Joueur n°${i}"></input></div>`;
+        htmlUsername += `<div class='col containerInputUsername'><input type="text" class="form-control inputUsername" name="joueur${i}" placeholder="Joueur n°${i}"></input></div>`;
     }
     usernamesContainer.innerHTML = htmlUsername;
 }
