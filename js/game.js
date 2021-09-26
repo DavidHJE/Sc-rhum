@@ -392,14 +392,28 @@ buttonValidateQuestion.addEventListener("click", () => {
   let selectedResponse = document.querySelector('input[type=radio]:checked');
   if(selectedResponse) {
     if(_.toNumber(selectedResponse.id) == question.answer_index){
-      alert("Bien joué");
+      iziToast.success({
+        message: 'Bonne réponse ! Vous avancez d\'une case supplémentaire',
+        position: 'center',
+        timeout: 1500,
+        closeOnEscape: true,
+        closeOnClick: true,
+        transitionIn: 'flipInX'
+      });
       playersPoints[actualPlayerId].x += 100;
       if (playersPoints[actualPlayerId].x > 1000) {
         playersPoints[actualPlayerId].x -= 1000;
         playersPoints[actualPlayerId].y += 100;
       }
     }else {
-      alert("C'est non !");
+      iziToast.error({
+        message: 'C\'est non',
+        position: 'center',
+        timeout: 1500,
+        closeOnEscape: true,
+        closeOnClick: true,
+        transitionIn: 'flipInX'
+      });
     }
     questionModal.hide();
     endTurn();
